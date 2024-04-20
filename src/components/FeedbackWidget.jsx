@@ -24,7 +24,7 @@ const FeedbackWidget = () => {
   useEffect(() => {
     console.log('Total Feedback:', countTotalFeedback());
     console.log('Positive Feedback Percentage:', countPositiveFeedbackPercentage().toFixed(2) + '%');
-  }, [feedback]);
+  }, [feedback, countPositiveFeedbackPercentage, countTotalFeedback]); // Agregando las funciones como dependencias
 
   return (
     <div className="container">
