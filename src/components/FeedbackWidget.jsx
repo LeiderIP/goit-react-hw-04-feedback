@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 const FeedbackWidget = () => {
   const [feedback, setFeedback] = useState({ good: 0, neutral: 0, bad: 0 });
@@ -10,21 +10,24 @@ const FeedbackWidget = () => {
     }));
   };
 
-  const countTotalFeedback = () => {
+  const countTotalFeedback = useCallback(() => {
     const { good, neutral, bad } = feedback;
     return good + neutral + bad;
-  };
+  }, [feedback]);
 
-  const countPositiveFeedbackPercentage = () => {
+  const countPositiveFeedbackPercentage = useCallback(() => {
     const total = countTotalFeedback();
     const { good } = feedback;
     return total === 0 ? 0 : (good / total) * 100;
-  };
+  }, [countTotalFeedback, feedback]);
 
   useEffect(() => {
     console.log('Total Feedback:', countTotalFeedback());
-    console.log('Positive Feedback Percentage:', countPositiveFeedbackPercentage().toFixed(2) + '%');
-  }, [feedback, countPositiveFeedbackPercentage, countTotalFeedback]); // Agregando las funciones como dependencias
+    console.log(
+      'Positive Feedback Percentage:',
+      countPositiveFeedbackPercentage().toFixed(2) + '%'
+    );
+  }, [feedback, countTotalFeedback, countPositiveFeedbackPercentage]);
 
   return (
     <div className="container">
