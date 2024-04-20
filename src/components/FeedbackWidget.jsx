@@ -23,10 +23,7 @@ const FeedbackWidget = () => {
 
   useEffect(() => {
     console.log('Total Feedback:', countTotalFeedback());
-    console.log(
-      'Positive Feedback Percentage:',
-      countPositiveFeedbackPercentage().toFixed(2) + '%'
-    );
+    console.log('Positive Feedback Percentage:', countPositiveFeedbackPercentage().toFixed(2) + '%');
   }, [feedback]);
 
   return (
